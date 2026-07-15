@@ -3,104 +3,447 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Somon Casino</title>
+    <title>1WIN Somon</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        :root {
+            --bg-color: #0e1621;
+            --card-bg: #17212b;
+            --accent-blue: #0088cc;
+            --accent-green: #2ecc71;
+            --accent-gold: #f1c40f;
+            --text-main: #ffffff;
+            --text-muted: #808d9a;
+        }
+
         body {
             margin: 0;
             padding: 0;
-            background-color: #0f172a;
-            color: white;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            text-align: center;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            padding-bottom: 80px;
         }
+
+        /* Header */
         .header {
-            padding: 20px;
-            background: linear-gradient(180deg, #1e293b, #0f172a);
-            border-bottom: 2px solid #eab308;
+            background-color: var(--card-bg);
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #24303f;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
-        .header h1 {
-            margin: 0;
-            font-size: 24px;
-            color: #eab308;
+
+        .logo {
+            font-size: 20px;
+            font-weight: 900;
+            color: var(--accent-blue);
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
         }
+        .logo span {
+            color: var(--accent-gold);
+        }
+
         .balance-box {
-            background-color: #1e293b;
-            display: inline-block;
-            padding: 10px 20px;
-            border-radius: 20px;
-            margin-top: 15px;
-            border: 1px solid #334155;
+            background: linear-gradient(135deg, #1e2d3d, #17212b);
+            padding: 8px 15px;
+            border-radius: 10px;
+            border: 1px solid #2c3e50;
+            font-size: 14px;
         }
+
         .balance-box span {
-            color: #eab308;
-            font-weight: bold;
-        }
-        .games-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            padding: 20px;
-            margin-top: 10px;
-        }
-        .game-card {
-            background: #1e293b;
-            border: 1px solid #334155;
-            border-radius: 12px;
-            padding: 20px;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-        .game-card:active {
-            transform: scale(0.95);
-        }
-        .game-icon {
-            font-size: 40px;
-            margin-bottom: 10px;
-        }
-        .game-title {
+            color: var(--accent-green);
             font-weight: bold;
             font-size: 16px;
         }
+
+        /* Main Content Container */
+        .container {
+            padding: 15px;
+        }
+
+        /* Tabs CSS */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Banner */
+        .banner {
+            background: linear-gradient(135deg, #0088cc, #004466);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: left;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .banner h2 {
+            margin: 0 0 10px 0;
+            font-size: 20px;
+        }
+
+        .banner p {
+            margin: 0;
+            color: #e0e0e0;
+            font-size: 13px;
+        }
+
+        /* Grid Games */
+        .games-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .game-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #24303f;
+            transition: transform 0.2s;
+        }
+
+        .game-card:active {
+            transform: scale(0.95);
+        }
+
+        .game-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .game-title {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .game-status {
+            font-size: 10px;
+            background-color: #2c3e50;
+            padding: 2px 8px;
+            border-radius: 10px;
+            color: var(--text-muted);
+            display: inline-block;
+        }
+
+        .game-status.active {
+            background-color: rgba(46, 204, 113, 0.2);
+            color: var(--accent-green);
+        }
+
+        /* Forms inside Tabs (Wallet, Voucher, Partners) */
+        .card-form {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid #24303f;
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
+        .card-form h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: var(--accent-blue);
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #2c3e50;
+            background-color: #0e1621;
+            color: white;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        .btn-action {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--accent-blue);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .btn-action:active {
+            background-color: #006699;
+        }
+
+        .info-box {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
+            background: rgba(23, 33, 43, 0.5);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 3px solid var(--accent-blue);
+        }
+
+        /* Bottom Nav */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 65px;
+            background-color: var(--card-bg);
+            border-top: 1px solid #24303f;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .nav-item {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 11px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 5px;
+        }
+
+        .nav-item i {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+
+        .nav-item.active {
+            color: var(--accent-blue);
+        }
+
     </style>
 </head>
 <body>
 
+    <!-- Header -->
     <div class="header">
-        <h1>SOMON CASINO</h1>
+        <div class="logo">1WIN <span>SOMON</span></div>
         <div class="balance-box">
-            Баланс: <span id="balance">1,000</span> TJS
+            Баланс: <span id="balance">100</span> TJS
         </div>
     </div>
 
-    <div class="games-grid">
-        <div class="game-card" onclick="alert('Бозии Mines ба наздикӣ фаъол мешавад!')">
-            <div class="game-icon">💣</div>
-            <div class="game-title">MINES</div>
+    <div class="container">
+        
+        <!-- ТАБИ 1: БОЗИҲО -->
+        <div id="tab-games" class="tab-content active">
+            <div class="banner">
+                <h2>Бонус ба пасандози аввал!</h2>
+                <p>Баланси худро пур кунед ва +500% бонус гиред.</p>
+            </div>
+            
+            <div class="games-grid">
+                <div class="game-card" onclick="alert('Бозии Mines ба наздикӣ фаъол мешавад!')">
+                    <span class="game-icon">💣</span>
+                    <div class="game-title">MINES</div>
+                    <span class="game-status active">Омода аст</span>
+                </div>
+                <div class="game-card" onclick="alert('Бозии Crash ба наздикӣ фаъол мешавад!')">
+                    <span class="game-icon">🚀</span>
+                    <div class="game-title">CRASH</div>
+                    <span class="game-status">Ба наздикӣ</span>
+                </div>
+                <div class="game-card" onclick="alert('Бозии Roulette ба наздикӣ фаъол мешавад!')">
+                    <span class="game-icon">🎡</span>
+                    <div class="game-title">ROULETTE</div>
+                    <span class="game-status">Ба наздикӣ</span>
+                </div>
+                <div class="game-card" onclick="alert('Бозии Dice ба наздикӣ фаъол мешавад!')">
+                    <span class="game-icon">🎲</span>
+                    <div class="game-title">DICE</div>
+                    <span class="game-status">Ба наздикӣ</span>
+                </div>
+            </div>
         </div>
-        <div class="game-card" onclick="alert('Бозии Crash ба наздикӣ фаъол мешавад!')">
-            <div class="game-icon">🚀</div>
-            <div class="game-title">CRASH</div>
+
+        <!-- ТАБИ 2: ҲАМЁН (КОШЕЛЕК) -->
+        <div id="tab-wallet" class="tab-content">
+            <div class="card-form">
+                <h3>💳 Пур кардани ҳисоб</h3>
+                <div class="input-group">
+                    <label>Рақами корт (Корти миллӣ, Душанбе Сити ва ғ.)</label>
+                    <input type="text" id="card-number" placeholder="4444 0000 0000 0000" maxlength="19">
+                </div>
+                <div class="input-group">
+                    <label>Маблағ (TJS)</label>
+                    <input type="number" id="deposit-amount" placeholder="Масалан: 50">
+                </div>
+                <button class="btn-action" onclick="makeDeposit()">Идома додан</button>
+            </div>
+            <div class="info-box">
+                ℹ️ Пур кардани ҳисоб тариқи кортҳои миллии Ҷумҳурии Тоҷикистон амалӣ карда мешавад. Маблағ дар давоми 1-5 дақиқа ба суратҳисоб гузаронида мешавад.
+            </div>
         </div>
-        <div class="game-card" onclick="alert('Бозии Roulette ба наздикӣ фаъол мешавад!')">
-            <div class="game-icon">🎡</div>
-            <div class="game-title">ROULETTE</div>
+
+        <!-- ТАБИ 3: ШАРИКОН (ПАРТНЕРЫ) -->
+        <div id="tab-partners" class="tab-content">
+            <div class="card-form">
+                <h3>🤝 Барномаи шарикӣ</h3>
+                <p style="font-size: 14px; line-height: 1.4; margin-bottom: 20px;">Дӯстони худро даъват кунед ва 50% аз ҳар як бурди онҳоро ба даст оред!</p>
+                
+                <div class="input-group">
+                    <label>Линки шарикии шумо:</label>
+                    <input type="text" id="ref-link" value="https://t.me/Somon_mines_new_bot?start=ref12345" readonly>
+                </div>
+                <button class="btn-action" onclick="copyRefLink()">Нусхабардорӣ кардани линк</button>
+            </div>
         </div>
-        <div class="game-card" onclick="alert('Бозии Dice ба наздикӣ фаъол мешавад!')">
-            <div class="game-icon">🎲</div>
-            <div class="game-title">DICE</div>
+
+        <!-- ТАБИ 4: ВАУЧЕР -->
+        <div id="tab-voucher" class="tab-content">
+            <div class="card-form">
+                <h3>🎁 Фаъолсозии Ваучер</h3>
+                <div class="input-group">
+                    <label>Коди ваучерро ворид кунед:</label>
+                    <input type="text" id="voucher-input" placeholder="Масалан: SOMON2026" style="text-transform: uppercase;">
+                </div>
+                <button class="btn-action" onclick="activateVoucher()" style="background-color: var(--accent-gold); color: black;">Фаъол кардан</button>
+            </div>
+            <div class="info-box">
+                ℹ️ Ваучерҳо дар каналҳои расмии мо ройгон паҳн карда мешаванд. Рамзи махсуси <b>SOMON2026</b>-ро нависед, то 500 TJS-ро ҳозир ройгон ба даст оред!
+            </div>
         </div>
+
+        <!-- ТАБИ 5: ДАСТГИРӢ (ПОДДЕРЖКА) -->
+        <div id="tab-support" class="tab-content">
+            <div class="card-form" style="text-align: center;">
+                <i class="fa-solid fa-headset" style="font-size: 50px; color: var(--accent-blue); margin-bottom: 15px;"></i>
+                <h3>Дастгирии техникӣ</h3>
+                <p style="font-size: 14px; line-height: 1.5; color: var(--text-muted);">Барои ҳамаи саволҳо ва мушкилот оид ба пардохт ё бозиҳо, ба оператори мо муроҷиат кунед.</p>
+                <button class="btn-action" onclick="window.open('https://t.me/mehrobbarotzoda1-hub', '_blank')">💬 Навиштан ба дастгирӣ</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bottom Navigation Bar -->
+    <div class="bottom-nav">
+        <button class="nav-item active" onclick="switchTab(event, 'tab-games')">
+            <i class="fa-solid fa-gamepad"></i>
+            Бозиҳо
+        </button>
+        <button class="nav-item" onclick="switchTab(event, 'tab-wallet')">
+            <i class="fa-solid fa-wallet"></i>
+            Ҳамён
+        </button>
+        <button class="nav-item" onclick="switchTab(event, 'tab-partners')">
+            <i class="fa-solid fa-users"></i>
+            Шарикон
+        </button>
+        <button class="nav-item" onclick="switchTab(event, 'tab-voucher')">
+            <i class="fa-solid fa-gift"></i>
+            Ваучер
+        </button>
+        <button class="nav-item" onclick="switchTab(event, 'tab-support')">
+            <i class="fa-solid fa-headset"></i>
+            Дастгирӣ
+        </button>
     </div>
 
     <script>
+        // Инициализация Telegram WebApp
         const tele = window.Telegram.WebApp;
-        tele.ready();
-        tele.expand();
+        if(tele) {
+            tele.ready();
+            tele.expand();
+        }
+
+        let currentBalance = 100;
+
+        // Иваз кардани Табҳо (Вкладки)
+        function switchTab(event, tabId) {
+            // Тоза кардани фаъолияти ҳамаи табҳо
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => item.classList.remove('active'));
+
+            // Фаъол кардани таби интихобшуда
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        // Симулятсияи Ваучер
+        function activateVoucher() {
+            const voucherCode = document.getElementById('voucher-input').value.trim().toUpperCase();
+            if (voucherCode === 'SOMON2026') {
+                currentBalance += 500;
+                document.getElementById('balance').innerText = currentBalance.toLocaleString();
+                alert('🎉 Ваучер бомуваффақият фаъол шуд! Ба баланси шумо 500 TJS илова гардид.');
+                document.getElementById('voucher-input').value = '';
+            } else if (voucherCode === '') {
+                alert('Лутфан коди ваучерро ворид кунед!');
+            } else {
+                alert('❌ Ваучер ёфт нашуд ё мӯҳлати он гузаштааст!');
+            }
+        }
+
+        // Симулятсияи Пур кардани Ҳисоб
+        function makeDeposit() {
+            const cardNum = document.getElementById('card-number').value.trim();
+            const amount = parseFloat(document.getElementById('deposit-amount').value);
+
+            if (!cardNum || isNaN(amount) || amount <= 0) {
+                alert('Лутфан рақами корт ва маблағи дурустро ворид кунед!');
+                return;
+            }
+
+            alert(`✅ Дархости пур кардани ҳисоб ба маблағи ${amount} TJS қабул шуд. Пас аз тасдиқ маблағ ба баланси шумо илова мешавад.`);
+            
+            // Барои симулятсияи воқеӣ балансро зиёд мекунем
+            currentBalance += amount;
+            document.getElementById('balance').innerText = currentBalance.toLocaleString();
+            
+            document.getElementById('card-number').value = '';
+            document.getElementById('deposit-amount').value = '';
+        }
+
+        // Нусхабардории линки рефералӣ
+        function copyRefLink() {
+            const refInput = document.getElementById('ref-link');
+            refInput.select();
+            refInput.setSelectionRange(0, 99999); // Барои телефонҳо
+            navigator.clipboard.writeText(refInput.value);
+            alert('📋 Линки шарикии шумо нусхабардорӣ шуд. Онро ба дӯстонатон фиристед!');
+        }
     </script>
 </body>
 </html>
-
-
-
