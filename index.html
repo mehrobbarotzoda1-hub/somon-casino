@@ -1,1 +1,106 @@
+<!DOCTYPE html>
+<html lang="tg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Somon Casino</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0f172a;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+        }
+        .header {
+            padding: 20px;
+            background: linear-gradient(180deg, #1e293b, #0f172a);
+            border-bottom: 2px solid #eab308;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #eab308;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .balance-box {
+            background-color: #1e293b;
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 20px;
+            margin-top: 15px;
+            border: 1px solid #334155;
+        }
+        .balance-box span {
+            color: #eab308;
+            font-weight: bold;
+        }
+        .games-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            padding: 20px;
+            margin-top: 10px;
+        }
+        .game-card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .game-card:active {
+            transform: scale(0.95);
+        }
+        .game-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+        .game-title {
+            font-weight: bold;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>SOMON CASINO</h1>
+        <div class="balance-box">
+            Баланс: <span id="balance">1,000</span> TJS
+        </div>
+    </div>
+
+    <div class="games-grid">
+        <div class="game-card" onclick="alert('Бозии Mines ба наздикӣ фаъол мешавад!')">
+            <div class="game-icon">💣</div>
+            <div class="game-title">MINES</div>
+        </div>
+        <div class="game-card" onclick="alert('Бозии Crash ба наздикӣ фаъол мешавад!')">
+            <div class="game-icon">🚀</div>
+            <div class="game-title">CRASH</div>
+        </div>
+        <div class="game-card" onclick="alert('Бозии Roulette ба наздикӣ фаъол мешавад!')">
+            <div class="game-icon">🎡</div>
+            <div class="game-title">ROULETTE</div>
+        </div>
+        <div class="game-card" onclick="alert('Бозии Dice ба наздикӣ фаъол мешавад!')">
+            <div class="game-icon">🎲</div>
+            <div class="game-title">DICE</div>
+        </div>
+    </div>
+
+    <script>
+        const tele = window.Telegram.WebApp;
+        tele.ready();
+        tele.expand();
+    </script>
+</body>
+</html>
+
+
 
